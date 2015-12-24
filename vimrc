@@ -28,13 +28,14 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'luochen1990/rainbow'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'chriskempson/base16-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -126,10 +127,31 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " General Settings
 syntax on
-" solarized theme
-set background=dark
-colorscheme solarized
+set number
+set hidden
+let g:rainbow_active = 1
 " permanent status line
 set laststatus=2
-let &t_Co=256
-set number
+" look in parent dirs until .tags is found
+set tags=tags;/
+" #ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_working_path_mode='ra'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|class)$',
+  \ }
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --others --cached --exclude-standard']
+" gitgutter
+let g:gitgutter_updatetime = 750
+" vim-scala import sorting
+let g:scala_sort_across_groups=1
+let g:scala_first_party_namespaces='\(com.optrak\)'
+" themes
+set background=dark
+" solarized theme
+"let g:solarized_termcolors=256
+"colorscheme solarized
+let base16colorspace=256  " Access colors present in 256 colorspace
+let g:base16_shell_path='/home/waynec/.config/base16-builder/output/shell/'
+colorscheme base16-default
